@@ -7,6 +7,9 @@ from ..floorfactory import FloorFactory
 from ..dice import Dice
 from ..heroes import VikingHero
 
+# gui
+from ..gui import PGui
+
 class BoardState(State):
 
     def __init__(self,screen,rm):
@@ -34,13 +37,9 @@ class BoardState(State):
 
     def _step(self):
         self.ticks += 1
-        print self.dice.roll(3)
 
     def _input(self,im):
         State._input(self,im)
-
-    def _draw(self):
-        pass
 
     # actions
     def flip_card(index):

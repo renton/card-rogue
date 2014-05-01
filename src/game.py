@@ -6,6 +6,8 @@ from input_manager import InputManager
 
 from states import BoardState
 
+from gui import PGui
+
 class Game():
 
     def __init__(self):
@@ -37,12 +39,15 @@ class Game():
         # state setup
         self.cur_state = BoardState(self.screen,self.rm)
 
+        # gui
+        self.gui = PGui(self)
+
     def _step(self):
+        self.gui._step()
         self.cur_state._step()
 
     def _draw(self):
-        self.screen.fill((120,120,150))
-        self.cur_state._draw()
+        self.gui._draw()
 
     def mainloop(self):
         while(1):
