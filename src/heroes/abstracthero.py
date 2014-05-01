@@ -6,7 +6,11 @@ class AbstractHero():
 
         print "loading "+hero_string+" stats"
 
-        stats = SETTINGS['heroes'][hero_string]
+        self.hero_string = hero_string
+        self._load_stats()
+
+    def _load_stats(self):
+        stats = SETTINGS['heroes'][self.hero_string]
 
         # hp
         self.max_hp = stats['max_hp']
@@ -28,8 +32,8 @@ class AbstractHero():
         self.items = []
 
         self.core_items = {}
-        for core_item in SETTINGS['core_items']:
-            self.core_items[core_item] = stats['start_core_items'][core_item]
+        for k,v in SETTINGS['core_items'].items():
+            self.core_items[k] = stats['start_core_items'][k]
 
         # trading
         self.trade_ratio = SETTINGS['default_trade_ratio']
@@ -62,9 +66,6 @@ class AbstractHero():
         pass
 
     def event_after_exit(self):
-        pass
-
-    def event_after_take_damage(self):
         pass
 
     def event_after_damage_to_monster(self):

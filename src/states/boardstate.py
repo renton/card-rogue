@@ -4,7 +4,7 @@ from state import State
 from ..settings import *
 
 from ..floorfactory import FloorFactory
-
+from ..dice import Dice
 from ..heroes import VikingHero
 
 class BoardState(State):
@@ -13,11 +13,14 @@ class BoardState(State):
         State.__init__(self,screen,rm)
 
         # board stats
-        self.cur_floor = 1
+        self.cur_floor_lvl = SETTINGS['default_starting_floor']
+
+        # dice
+        self.dice = Dice()
 
         # floor
         self.ff = FloorFactory()
-        self.cur_floor = None
+        self._generate_floor()
 
         # timer
         self.ticks = 0
@@ -25,11 +28,27 @@ class BoardState(State):
         # hero
         self.hero = VikingHero()
 
+    def _generate_floor(self):
+        self.cur_floor = self.ff.generate_floor(self.cur_floor_lvl)
+        self.cur_floor.debug_print()
+
     def _step(self):
         self.ticks += 1
+        print self.dice.roll(3)
 
     def _input(self,im):
         State._input(self,im)
 
     def _draw(self):
         pass
+
+    # actions
+    def flip_card(index):
+        pass
+
+    def exit_floor(self):
+        pass
+
+    def _advance_floor(self):
+        self.cur_floor_lvl += 1
+        self._generate_floor()
