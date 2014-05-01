@@ -62,9 +62,8 @@ class Game():
                     sys.exit()
                 if event.type == pygame.KEYDOWN:
                     self.im.set_key_event(event.type,event.key)
-                if event.type == pygame.JOYBUTTONDOWN:
-                    self.im.set_joy_button_event(event.type,event.button)
-
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    self.im.set_mouse_event(event.type,event)
 
             # let state handle input
             self.im.update()

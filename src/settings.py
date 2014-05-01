@@ -9,7 +9,7 @@ SETTINGS['window_y_size'] = 600
 SETTINGS['default_fps'] = 60
 
 # board stats
-SETTINGS['default_starting_floor'] = 25
+SETTINGS['default_starting_floor'] = 10
 SETTINGS['max_floor_size'] = 25
 
 # hero stats

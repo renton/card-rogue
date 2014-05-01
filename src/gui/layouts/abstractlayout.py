@@ -7,16 +7,16 @@ class AbstractLayout():
 
         self.templates = []
 
-    def _step(self):
+    def _step(self,mousestate):
         for template in self.templates:
-            template._step()
+            template._step(mousestate)
 
     def _draw(self,screen):
         screen.fill(self.bg_colour)
         for template in self.templates:
             template._draw(screen)
 
-    def _input(self):
+    def _setup(self):
         pass
 
     def add_template(self,template):
