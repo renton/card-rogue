@@ -7,6 +7,11 @@ class TrapCard(AbstractCard):
     def __init__(self,damage): 
         AbstractCard.__init__(self)
         self.damage = damage
+        self.name = "TRAP"
+
+    def turn_card(self,hero):
+        AbstractCard.turn_card(self,hero)
+        hero.take_damage(self.damage,False)
 
     # debug
     def debug_print(self):

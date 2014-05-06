@@ -9,6 +9,7 @@ class SlotsCard(AbstractCard):
         self.cost = cost
         self.destroy_chance = destroy_chance
         self.destroyed = False
+        self.name = "SLOTS"
 
     def destroy(self):
         self.destroyed = True

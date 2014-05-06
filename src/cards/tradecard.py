@@ -7,6 +7,7 @@ class TradeCard(AbstractCard):
         AbstractCard.__init__(self)
         self.need = need
         self.gain = gain
+        self.name = "TRADE"
 
     # actions
     def action_make_trade(self):

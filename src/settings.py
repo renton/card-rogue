@@ -4,13 +4,15 @@ SETTINGS = {}
 
 # window
 SETTINGS['fullscreen_mode'] = False
-SETTINGS['window_x_size'] = 800
-SETTINGS['window_y_size'] = 600
+SETTINGS['window_x_size'] = 1280
+SETTINGS['window_y_size'] = 1024
 SETTINGS['default_fps'] = 60
+SETTINGS['top_left_x'] = 0
+SETTINGS['top_left_y'] = 0
 
 # board stats
 SETTINGS['default_starting_floor'] = 10
-SETTINGS['max_floor_size'] = 25
+SETTINGS['max_floor_size'] = 24
 
 # hero stats
 SETTINGS['default_hero_string'] = "default"
@@ -190,3 +192,6 @@ SETTINGS['advice_tips'] = [
 
 # dice
 SETTINGS['dice_sides'] = [1,2,3,4,5,6]
+
+# fonts
+SETTINGS['preload_fonts'] = ['monospace']

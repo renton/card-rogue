@@ -25,7 +25,7 @@ class AbstractHero():
         self.dice_modifier = stats['dice_modifier']
 
         # evade/crit
-        self.evace_percent = stats['evade_percent']
+        self.evade_percent = stats['evade_percent']
         self.crit_percent = stats['crit_percent']
 
         # inventory
@@ -50,16 +50,25 @@ class AbstractHero():
         pass
 
     def gain_hp(self,amount):
-        pass
+        self.cur_hp += amount
+
+        if self.cur_hp > self.max_hp:
+            self.cur_hp = self.max_hp
 
     def level_up(self):
         pass
 
-    def take_damage(self,amount):
-        pass
+    def take_damage(self,amount,is_fatal):
+        self.cur_hp -= amount
+        
+        if self.cur_hp <= 0 and not is_fatal:
+            self.cur_hp = 1
+
+        if self.cur_hp <= 0:
+            self.die()
 
     def die(self):
-        pass
+        print "ded"
 
     # events
     def event_after_card_flip(self):

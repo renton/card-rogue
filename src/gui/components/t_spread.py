@@ -1,24 +1,20 @@
-from abstracttemplate import AbstractTemplate
+from abstractcomponent import AbstractComponent
+from c_card import CCard,CEmptyCard
 from ..gui_settings import *
-from ..components import *
 from ...settings import *
-
 from random import sample
 
-class TSpread(AbstractTemplate):
+class TSpread(AbstractComponent):
 
-    def __init__(self,x,y,cards):
-        AbstractTemplate.__init__(self,x,y,100,100)
+    def __init__(self,x,y,cards,boardstate):
+        AbstractComponent.__init__(self,x,y,0,0)
         self.rows = G_SETTINGS['spread_default_rows']
         self.cols = G_SETTINGS['spread_default_cols']
         self.padding = G_SETTINGS['spread_default_padding']
+        self.boardstate = boardstate
+        self.display = False
+
         self._build_spread(cards)
-
-    def _step(self,mousestate):
-        AbstractTemplate._step(self,mousestate)
-
-    def _draw(self,screen):
-        AbstractTemplate._draw(self,screen)
 
     def _build_spread(self,cards):
 
@@ -31,9 +27,9 @@ class TSpread(AbstractTemplate):
         for card in range(SETTINGS['max_floor_size']):
 
             if count_card in placements:
-                self.add_component(CCard(pos_x,pos_y,cards.pop()))
+                self.add_child_component(CCard(pos_x,pos_y,cards.pop(),self.boardstate))
             else:
-                self.add_component(CEmptyCard(pos_x,pos_y))
+                self.add_child_component(CEmptyCard(pos_x,pos_y))
 
             pos_x += G_SETTINGS['card_w']+self.padding
             count_col += 1

@@ -8,6 +8,7 @@ class TipCard(AbstractCard):
     def __init__(self): 
         AbstractCard.__init__(self)
         self.tip_text = choice(SETTINGS['advice_tips'])
+        self.name = "TIP"
 
     # actions
     def action_get_tip(self):

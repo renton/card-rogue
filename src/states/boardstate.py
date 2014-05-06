@@ -42,8 +42,12 @@ class BoardState(State):
         State._input(self,im)
 
     # actions
-    def flip_card(index):
-        pass
+    # TODO - kind of weird to pass card, but keeps gui cleaner
+    def flip_card(self,card):
+        card.turn_card(self.hero)
+
+    def action_card(self,card,action):
+        card.actions[action]["fn"](self.hero)
 
     def exit_floor(self):
         pass

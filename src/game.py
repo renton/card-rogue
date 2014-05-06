@@ -8,6 +8,8 @@ from states import BoardState
 
 from gui import PGui
 
+# TODO - should probably roll cards at click event so that it isn't stored in memory for ppl to cheat
+
 class Game():
 
     def __init__(self):

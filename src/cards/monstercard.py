@@ -6,6 +6,7 @@ class MonsterCard(AbstractCard):
         AbstractCard.__init__(self)
         self.monster = monster
         self.reward = {}
+        self.name = "MONSTER"
 
     # debug
     def debug_print(self):

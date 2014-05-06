@@ -7,12 +7,20 @@ class ChestCard(AbstractCard):
         AbstractCard.__init__(self)
         self.locked = True
         self.reward = reward
+        self.name = "CHEST"
+        self.actions = {
+                            "loot":{
+                                "fn":lambda hero:self.action_get_reward(hero),
+                                "enabled":True,
+                            }
+                        }
 
     # actions
-    def action_get_reward(self):
-        temp = self.reward
-        self.reward = {}
-        return temp
+    def action_get_reward(self,hero):
+        if self.is_action_enabled("loot"):
+            temp = self.reward
+            self.reward = {}
+            self.disable_action("loot")
 
     # debug
     def debug_print(self):

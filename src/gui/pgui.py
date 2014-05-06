@@ -1,4 +1,4 @@
-from layouts.boardlayout import BoardLayout
+from components import *
 
 class PGui():
 
@@ -14,7 +14,7 @@ class PGui():
 
     def __init__(self,game):
         self.g = game
-        self._setup_layout(BoardLayout())
+        self._setup_layout(BoardLayout(self.g.cur_state.cur_floor.cards,self.g.cur_state.hero,self.g.cur_state))
 
     def _setup_layout(self,layout):
         self.cur_layout = layout
@@ -26,7 +26,7 @@ class PGui():
         self.cur_layout._step(self.g.im.mouseevents)
 
     def _draw(self):
-        self.cur_layout._draw(self.g.screen)
+        self.cur_layout._draw(self.g.screen,self.g.rm)
 
     def _input(self):
         pass
