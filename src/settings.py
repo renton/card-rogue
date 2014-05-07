@@ -48,11 +48,11 @@ SETTINGS['heroes'] = {
         'evade_percent':0,
         'crit_percent':0,
         'start_core_items':{
-            'bows':1,
-            'wands':1,
-            'swords':1,
-            'keys':1,
-            'gold':1,
+            'bows':100,
+            'wands':100,
+            'swords':100,
+            'keys':100,
+            'gold':100,
         },
         'elemental_attack':{
             'fire':2,

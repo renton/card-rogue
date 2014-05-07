@@ -14,16 +14,15 @@ class PGui():
 
     def __init__(self,game):
         self.g = game
-        self._setup_layout(BoardLayout(self.g.cur_state.cur_floor.cards,self.g.cur_state.hero,self.g.cur_state))
+        self._setup_layout(BoardLayout(self.g))
 
     def _setup_layout(self,layout):
         self.cur_layout = layout
-        self.cur_layout._setup(self.g)
 
     def _step(self):
         self._input()
         #TODO should be called mouseevents throughout layout/template/component
-        self.cur_layout._step(self.g.im.mouseevents)
+        self.cur_layout._step(self.g.im.mouseevents,self.g)
 
     def _draw(self):
         self.cur_layout._draw(self.g.screen,self.g.rm)

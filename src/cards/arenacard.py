@@ -8,18 +8,15 @@ class ArenaCard(AbstractCard):
         self.reward = reward
         self.name = "ARENA"
         self.actions = {
-                        "enter":{
-                                "fn":lambda hero:self.action(hero),
-                                "enabled":True,
-                            }
+                        "enter":True,
                         }
 
     def get_size(self):
         return len(self.monsters)
 
     # actions
-    def action(self,hero):
-        if self.actions['enter']['enabled']:
+    def action(self,action,hero):
+        if action == "enter" and self.is_action_enabled("enter"):
             self.disable_action("enter")
 
     # debug

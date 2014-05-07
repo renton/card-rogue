@@ -10,3 +10,5 @@ from slotscard import SlotsCard
 from monstercard import MonsterCard
 from trapcard import TrapCard
 from arenacard import ArenaCard
+from exitcard import ExitCard
+from thiefcard import ThiefCard

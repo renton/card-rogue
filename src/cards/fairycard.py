@@ -8,15 +8,12 @@ class FairyCard(AbstractCard):
         self.hp_gain = hp_gain
         self.name = "FAIRY"
         self.actions = {
-                            "catch":{
-                                "fn":lambda hero:self.action(hero),
-                                "enabled":True,
-                            }
+                            "catch":True,
                         }
                     
     # actions
-    def action(self,hero):
-        if self.actions['catch']['enabled']:
+    def action(self,action,hero):
+        if action == "catch" and self.is_action_enabled("catch"):
             hero.gain_hp(self.hp_gain)
             self.disable_action("catch")
 

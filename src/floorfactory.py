@@ -6,7 +6,7 @@ from floor import Floor
 from cards import *
 from monsterfactory import MonsterFactory
 
-from random import randint,choice,sample
+from random import randint,choice,sample,shuffle
 
 class FloorFactory():
 
@@ -16,13 +16,15 @@ class FloorFactory():
     def generate_floor(self,floor_lvl):
 
         self.floor_lvl = floor_lvl
-        if self.floor_lvl > SETTINGS['max_floor_size']:
-            self.floor_lvl = SETTINGS['max_floor_size']
+        if self.floor_lvl >= SETTINGS['max_floor_size']:
+            self.floor_lvl = SETTINGS['max_floor_size']-1
 
         cards = []
-        for i in range(floor_lvl):
+        cards.append(self._gen_exit_card())
 
-            test = randint(0,9)
+        for i in range(self.floor_lvl):
+
+            test = randint(0,10)
 
             if test == 0:
                 cards.append(self._gen_free_card())
@@ -53,6 +55,11 @@ class FloorFactory():
 
             if test == 9:
                 cards.append(self._gen_arena_card())
+
+            if test == 10:
+                cards.append(self._gen_thief_card())
+
+        shuffle(cards)
 
         return Floor(cards)
 
@@ -98,3 +105,9 @@ class FloorFactory():
     def _gen_arena_card(self):
         # TODO better reward for more monsters
         return ArenaCard([self.mf.generate_monster(self.floor_lvl)],{"wands":1})
+
+    def _gen_exit_card(self):
+        return ExitCard()
+
+    def _gen_thief_card(self):
+        return ThiefCard({"wands":3})

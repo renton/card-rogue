@@ -6,7 +6,7 @@ from ...settings import *
 class THeroHud(AbstractComponent):
 
     def __init__(self,x,y,hero):
-        AbstractComponent.__init__(self,x,y,0,0)
+        AbstractComponent.__init__(self,x,y,100,1000)
         self.hero = hero
         self._build_hud()
 

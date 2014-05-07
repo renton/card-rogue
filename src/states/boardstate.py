@@ -33,7 +33,10 @@ class BoardState(State):
 
     def _generate_floor(self):
         self.cur_floor = self.ff.generate_floor(self.cur_floor_lvl)
-        self.cur_floor.debug_print()
+        self.set_signal("new_floor")
+
+    def get_floor(self):
+        return self.cur_floor
 
     def _step(self):
         self.ticks += 1
@@ -47,10 +50,13 @@ class BoardState(State):
         card.turn_card(self.hero)
 
     def action_card(self,card,action):
-        card.actions[action]["fn"](self.hero)
+        if card.action(action,self.hero) == True:
+            self._exit_floor()
 
-    def exit_floor(self):
-        pass
+    def _exit_floor(self):
+        if self.cur_floor.visible_monsters_remaining() <= 0:
+            self.cur_floor_lvl += 1
+            self._generate_floor()
 
     def _advance_floor(self):
         self.cur_floor_lvl += 1

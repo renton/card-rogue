@@ -52,6 +52,9 @@ class AbstractComponent():
         self.child_components.append(component)
         return component
 
+    def clear_children(self):
+        self.child_components = []
+
     def in_bounds(self,x,y):
         return (x >= self.x and x <= (self.x+self.w)) and (y >= self.y and y <= (self.y+self.h))
 

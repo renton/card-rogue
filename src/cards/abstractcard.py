@@ -11,20 +11,23 @@ class AbstractCard():
     def turn_card(self,hero):
         self.flipped = True
 
+    def is_flipped(self):
+        return self.flipped
+
     def is_locked(self):
         return self.locked
 
     def unlock(self):
         self.locked = False
 
-    def action(self,hero):
-        pass
+    def action(self,action,hero):
+        return False
 
     def disable_action(self,action):
-        self.actions[action]["enabled"] = False
+        self.actions[action] = False
 
     def is_action_enabled(self,action):
-        return self.actions[action]["enabled"]
+        return self.actions[action]
 
     # debug
     def debug_print(self):

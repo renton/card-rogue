@@ -22,7 +22,7 @@ class CCard(AbstractComponent):
         AbstractComponent._step(self,mousestate)
 
         for k,v in self.actions.items():
-            if not self.card.actions[k]['enabled']:
+            if not self.card.is_action_enabled(k):
                 self.actions[k].bg_colour = (32,32,32)
 
     def _init_card(self):

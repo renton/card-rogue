@@ -14,20 +14,22 @@ class TSpread(AbstractComponent):
         self.boardstate = boardstate
         self.display = False
 
-        self._build_spread(cards)
-
     def _build_spread(self,cards):
+
+        self.clear_children()
 
         placements = sample(range(SETTINGS['max_floor_size']),len(cards))
 
         pos_x,pos_y = self.x,self.y
         count_row,count_col = 0,0
         count_card = 0
+        use_card = 0
 
         for card in range(SETTINGS['max_floor_size']):
 
             if count_card in placements:
-                self.add_child_component(CCard(pos_x,pos_y,cards.pop(),self.boardstate))
+                self.add_child_component(CCard(pos_x,pos_y,cards[use_card],self.boardstate))
+                use_card += 1
             else:
                 self.add_child_component(CEmptyCard(pos_x,pos_y))
 

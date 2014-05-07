@@ -46,6 +46,17 @@ class AbstractHero():
             else:
                 self.elemental_attack[element] = SETTINGS['default_elemental_attack']
 
+    def has_num_core_items(self,core_item,amount):
+        return self.core_items[core_item] >= amount
+
+    def lose_items(self,core_item,amount):
+        self.core_items[core_item] -= amount
+        if self.core_items[core_item] < 0:
+            self.core_items[core_item] = 0
+
+    def gain_items(self,core_item,amount):
+        self.core_items[core_item] += amount
+
     def gain_xp(self,amount):
         pass
 
