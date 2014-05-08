@@ -13,6 +13,7 @@ class BTextBlock(AbstractComponent):
                     h=0,
                     display_text=True,
                     click_event=lambda:True,
+                    display=False,
                     hover_event=lambda:True,
                 ):
         AbstractComponent.__init__(
@@ -28,7 +29,7 @@ class BTextBlock(AbstractComponent):
         self.bg_colour = bg_colour
         self.value = value
         self.display_text = display_text
-        self.display = False
+        self.display = display
 
     def _draw(self,screen,rm):
         AbstractComponent._draw(self,screen,rm)

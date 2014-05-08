@@ -11,7 +11,7 @@ SETTINGS['top_left_x'] = 0
 SETTINGS['top_left_y'] = 0
 
 # board stats
-SETTINGS['default_starting_floor'] = 10
+SETTINGS['default_starting_floor'] = 1
 SETTINGS['max_floor_size'] = 24
 
 # hero stats

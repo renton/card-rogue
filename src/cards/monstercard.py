@@ -8,13 +8,22 @@ class MonsterCard(AbstractCard):
         self.reward = {}
         self.name = "MONSTER"
         self.actions = {
-                        "kill":True,
+                        "fight":True,
+                        "ko":True,
                     }
 
     def action(self,action,hero):
-        if action == "kill" and self.is_action_enabled("kill"):
-            self.monster.take_damage(9999)    
-            self.disable_action("kill")
+        if action == "fight" and self.is_action_enabled("fight"):
+            pass
+        if action == "ko" and self.is_action_enabled("ko"):
+            pass
+
+        if self.monster.alive == False:
+            self.disable_action("fight")
+            self.disable_action("ko")
+
+    def is_action_enabled(self,action):
+        return self.monster.alive
 
     # debug
     def debug_print(self):

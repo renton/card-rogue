@@ -2,6 +2,7 @@ from abstractcomponent import AbstractComponent
 from t_spread import TSpread
 from t_hero_hud import THeroHud
 from t_dungeon_hud import TDungeonHud
+from t_battle_hud import TBattleHud
 from ..gui_settings import *
 from ...settings import *
 
@@ -55,6 +56,13 @@ class BoardLayout(AbstractComponent):
 
         self.t_dungeon_hud = self.add_child_component(TDungeonHud(
                                     400,
+                                    10,
+                                    game.cur_state,
+                                )
+                        )
+
+        self.t_battle_hud = self.add_child_component(TBattleHud(
+                                    1000,
                                     10,
                                     game.cur_state,
                                 )

@@ -25,6 +25,7 @@ class FloorFactory():
         for i in range(self.floor_lvl):
 
             test = randint(0,10)
+            #test = 7
 
             if test == 0:
                 cards.append(self._gen_free_card())

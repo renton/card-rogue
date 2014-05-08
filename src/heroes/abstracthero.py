@@ -12,6 +12,9 @@ class AbstractHero():
     def _load_stats(self):
         stats = SETTINGS['heroes'][self.hero_string]
 
+
+        self.alive = True
+
         # hp
         self.max_hp = stats['max_hp']
         self.cur_hp = self.max_hp
@@ -23,6 +26,7 @@ class AbstractHero():
 
         # dice
         self.dice_modifier = stats['dice_modifier']
+        self.num_dice_roll = 2
 
         # evade/crit
         self.evade_percent = stats['evade_percent']
@@ -46,6 +50,9 @@ class AbstractHero():
             else:
                 self.elemental_attack[element] = SETTINGS['default_elemental_attack']
 
+        # traits
+        self.always_first_strike = False
+
     def has_num_core_items(self,core_item,amount):
         return self.core_items[core_item] >= amount
 
@@ -58,7 +65,13 @@ class AbstractHero():
         self.core_items[core_item] += amount
 
     def gain_xp(self,amount):
-        pass
+        self.cur_xp += 1
+
+        if self.cur_xp >= self.next_lvl_xp:
+            self.level_up()
+
+        if (amount-1) > 0:
+            self.gain_xp(amount-1)
 
     def gain_hp(self,amount):
         self.cur_hp += amount
@@ -67,9 +80,11 @@ class AbstractHero():
             self.cur_hp = self.max_hp
 
     def level_up(self):
-        pass
+        self.cur_xp = 0
+        self.cur_lvl += 1
+        self.next_lvl_xp += 1
 
-    def take_damage(self,amount,is_fatal):
+    def take_damage(self,amount,is_fatal=True):
         self.cur_hp -= amount
         
         if self.cur_hp <= 0 and not is_fatal:
@@ -79,7 +94,13 @@ class AbstractHero():
             self.die()
 
     def die(self):
-        print "ded"
+        self.alive = False
+
+    def get_roll_modifiers(self,monster):
+        return 0
+
+    def get_elemental_modifiers(self,monster):
+        return 0
 
     # events
     def event_after_card_flip(self):
