@@ -1,6 +1,7 @@
 from abstractcomponent import AbstractComponent
 from b_text_block import BTextBlock
 from ..gui_settings import *
+from ...settings import *
 
 class CCard(AbstractComponent):
 
@@ -28,10 +29,18 @@ class CCard(AbstractComponent):
     def _init_card(self):
         self.label = self.add_child_component(BTextBlock(self.x,self.y,lambda:str(self.card.name),(32,0,0),0,0,False))
         self.actions = {}
+        lambda_click_events = {}
     
         # TODO handle multiple actions
+        y_offset = 40
         for k,v in self.card.actions.items():
-            self.actions[k] = self.add_child_component(BTextBlock(self.x,self.y+40,lambda:k,(0,100,0),100,40,False,lambda:self._action(k)))
+            self.actions[k] = self.add_child_component(BTextBlock(self.x,self.y+y_offset,build_lambda(k),(0,100,0),100,40,False,build_lambda_lambda(k,lambda k:self._action(k))))
+            lambda_click_events[k] = lambda:self._action(k)
+            y_offset += 60
+
+        for c in self.child_components:
+            print c.value()
+
 
     def _flip(self):
         if not self.flipped:
@@ -43,6 +52,7 @@ class CCard(AbstractComponent):
             self.flipped = True
 
     def _action(self,action):
+        print action
         self.boardstate.action_card(self.card,action)
 
     # events

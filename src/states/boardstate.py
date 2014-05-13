@@ -80,25 +80,13 @@ class BoardState(State):
                         self._game_over()
 
             if not self.cur_monster_target.alive:
+                for k,v in self.cur_monster_target.reward.items():
+                    self.hero.gain_items(k,v)
                 self.hero.gain_xp(1)
 
             return (total,base_total,roll,roll_mod,element_mod)
         else:
             return False
-
-    def ko(self):
-        if self.cur_monster_target.alive:
-            for k,v in self.cur_monster_target.ko_items.items():
-                if not self.hero.has_num_core_items(k,v):
-                    return False
-
-            monster.ko_damage()
-
-            for k,v in monster.ko_items.items():
-                hero.lose_items(k,v)
-
-            return True
-
 
     def _game_over(self):
         print "game over"

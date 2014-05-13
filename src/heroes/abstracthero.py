@@ -80,6 +80,7 @@ class AbstractHero():
             self.cur_hp = self.max_hp
 
     def level_up(self):
+        self.cur_hp = self.max_hp
         self.cur_xp = 0
         self.cur_lvl += 1
         self.next_lvl_xp += 1

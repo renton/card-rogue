@@ -16,7 +16,16 @@ class MonsterCard(AbstractCard):
         if action == "fight" and self.is_action_enabled("fight"):
             pass
         if action == "ko" and self.is_action_enabled("ko"):
-            pass
+            can_ko = True
+            if self.monster.alive:
+                for k,v in self.monster.ko_items.items():
+                    if not hero.has_num_core_items(k,v):
+                        can_ko = False
+
+                if can_ko:
+                    self.monster.ko_damage()
+                    for k,v in self.monster.ko_items.items():
+                        hero.lose_items(k,v)
 
         if self.monster.alive == False:
             self.disable_action("fight")
@@ -27,4 +36,4 @@ class MonsterCard(AbstractCard):
 
     # debug
     def debug_print(self):
-        print "MONSTER: "+str(self.monster)+" REWARD:"+str(self.reward)
+        print "MONSTER: "+str(self.monster)

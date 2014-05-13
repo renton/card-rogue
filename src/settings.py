@@ -43,16 +43,16 @@ SETTINGS['heroes'] = {
     'viking': {
         'name':'viking hero',
         'description':'viking description',
-        'max_hp':3,
+        'max_hp':5,
         'dice_modifier':0,
         'evade_percent':0,
         'crit_percent':0,
         'start_core_items':{
-            'bows':100,
-            'wands':100,
-            'swords':100,
-            'keys':100,
-            'gold':100,
+            'bows':0,
+            'wands':0,
+            'swords':3,
+            'keys':0,
+            'gold':0,
         },
         'elemental_attack':{
             'fire':2,
@@ -195,3 +195,9 @@ SETTINGS['dice_sides'] = [1,2,3,4,5,6]
 
 # fonts
 SETTINGS['preload_fonts'] = ['monospace']
+
+def build_lambda(value):
+    return lambda:value
+
+def build_lambda_lambda(value,lambda_fn):
+    return lambda:lambda_fn(value)
