@@ -38,10 +38,6 @@ class CCard(AbstractComponent):
             lambda_click_events[k] = lambda:self._action(k)
             y_offset += 60
 
-        for c in self.child_components:
-            print c.value()
-
-
     def _flip(self):
         if not self.flipped:
             self.boardstate.flip_card(self.card)
@@ -52,7 +48,6 @@ class CCard(AbstractComponent):
             self.flipped = True
 
     def _action(self,action):
-        print action
         self.boardstate.action_card(self.card,action)
 
     # events

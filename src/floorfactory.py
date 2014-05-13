@@ -24,40 +24,40 @@ class FloorFactory():
 
         for i in range(self.floor_lvl):
 
-            test = randint(0,10)
-            #test = 7
+            randroll = randint(0,99)
 
-            if test == 0:
+            # 5%
+            if randroll > 0 and randroll <= 4:
                 cards.append(self._gen_free_card())
-
-            if test == 1:
+            # 15%
+            elif randroll > 4 and randroll <= 19:
                 cards.append(self._gen_loot_card())
-
-            if test == 2:
+            # 10%
+            elif randroll > 19 and randroll <= 29:
                 cards.append(self._gen_tip_card())
-
-            if test == 3:
+            # 5%
+            elif randroll > 29 and randroll <= 34:
                 cards.append(self._gen_chest_card())
-
-            if test == 4:
+            # 15%
+            elif randroll > 34 and randroll <= 49:
                 cards.append(self._gen_trade_card())
-
-            if test == 5:
+            # 10%
+            elif randroll > 49 and randroll <= 59:
                 cards.append(self._gen_fairy_card())
-
-            if test == 6:
+            # 5%
+            elif randroll > 59 and randroll <= 64:
                 cards.append(self._gen_slots_card())
-
-            if test == 7:
+            # 20%
+            elif randroll > 64 and randroll <= 84:
                 cards.append(self._gen_monster_card())
-
-            if test == 8:
+            # 5%
+            elif randroll > 84 and randroll <= 89:
                 cards.append(self._gen_trap_card())
-
-            if test == 9:
+            # 5%
+            elif randroll > 89 and randroll <= 94:
                 cards.append(self._gen_arena_card())
-
-            if test == 10:
+            # 5%
+            else:
                 cards.append(self._gen_thief_card())
 
         shuffle(cards)
@@ -69,13 +69,39 @@ class FloorFactory():
         return FreeCard()
 
     def _gen_loot_card(self):
-        return LootCard({"bows":1})
+        reward_roll = randint(0,99)
+        reward = {}
+
+        if reward_roll > 0 and reward_roll <= 9:
+            # 200% key
+            reward = {'keys':1}
+        elif reward_roll > 9 and reward_roll <= 19:
+            # 20% wep
+            reward = {choice(SETTINGS['ko_weps']):1}
+        else:
+            # 60% gold
+            reward = {'gold':SETTINGS['core_items']['gold']['find_qty']()}
+
+        return LootCard(reward)
 
     def _gen_tip_card(self):
         return TipCard()
 
     def _gen_chest_card(self):
-        return ChestCard({"wands":1})
+        reward_roll = randint(0,99)
+        reward = {}
+
+        if reward_roll > 0 and reward_roll <= 9:
+            # 200% key
+            reward = {'keys':1}
+        elif reward_roll > 9 and reward_roll <= 19:
+            # 20% wep
+            reward = {choice(SETTINGS['ko_weps']):1}
+        else:
+            # 60% gold
+            reward = {'gold':SETTINGS['core_items']['gold']['chest_find_qty']()}
+
+        return ChestCard(reward)
 
     def _gen_trade_card(self):
         need_ratio,gain_ratio = choice(SETTINGS['card_types']['trade']['ratios'])
@@ -111,4 +137,7 @@ class FloorFactory():
         return ExitCard()
 
     def _gen_thief_card(self):
-        return ThiefCard({"wands":3})
+
+        steal = {choice(SETTINGS['core_items'].keys()):1}
+
+        return ThiefCard(steal)

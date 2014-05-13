@@ -93,11 +93,13 @@ SETTINGS['core_items'] = {
         'chest_find_qty':lambda:randint(2,3),
     },
     'gold':{
-        'ratio_trade_multiplier':lambda: randint(1,5),
+        'ratio_trade_multiplier':lambda: randint(2,5),
         'find_qty':lambda: randint(1,10),
         'chest_find_qty':lambda:randint(5,25),
     },
 }
+
+SETTINGS['ko_weps'] = ['bows','wands','swords']
 
 # elements
 SETTINGS['elements'] = ['fire','ice','electric','earth','dark','holy','plant']

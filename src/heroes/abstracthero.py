@@ -62,6 +62,7 @@ class AbstractHero():
             self.core_items[core_item] = 0
 
     def gain_items(self,core_item,amount):
+        print "GAIN: "+str(amount)+" "+str(core_item)
         self.core_items[core_item] += amount
 
     def gain_xp(self,amount):

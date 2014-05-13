@@ -61,8 +61,8 @@ class MonsterFactory():
             # 10% key
             reward = {'keys':1}
         elif reward_roll > 9 and reward_roll <= 19:
-            reward = {choice(ko_weps):1}
             # 10% wep
+            reward = {choice(ko_weps):1}
         elif reward_roll > 19 and reward_roll <= 49:
             # 30% nothing
             reward = {}
